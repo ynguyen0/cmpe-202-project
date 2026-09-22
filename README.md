@@ -24,6 +24,7 @@ If port 3001 is changed in `server/.env`, update the proxy in `client/vite.confi
 - `server/`: Express API, PostgreSQL connection pool, schema setup and API tests.
 - `compose.yaml`: local PostgreSQL 17, bound to localhost with a persistent volume.
 - `docs/aws-database.md`: connecting the backend to PostgreSQL on AWS.
+- `docs/project-journal.md`: weekly Scrum Reports and project progress notes.
 
 ## Commands
 
@@ -64,4 +65,3 @@ Backend relative imports keep `.js` extensions so the compiled Node.js modules r
 correctly; TypeScript and tsx resolve those imports to `.ts` during development.
 TypeScript does not validate incoming network data at runtime; the API still validates
 note input before writing to PostgreSQL.
-# cmpe-202-project
