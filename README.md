@@ -11,6 +11,7 @@ npm install
 cp server/.env.example server/.env
 npm run db:up
 npm run db:migrate
+npm run db:check
 npm run dev
 ```
 
@@ -65,3 +66,18 @@ Backend relative imports keep `.js` extensions so the compiled Node.js modules r
 correctly; TypeScript and tsx resolve those imports to `.ts` during development.
 TypeScript does not validate incoming network data at runtime; the API still validates
 note input before writing to PostgreSQL.
+
+## Local database connection
+
+The project database listens at `127.0.0.1:5433` (Docker maps this to PostgreSQL's
+internal port 5432). This avoids conflicts with a separate local PostgreSQL server.
+The database is `cmpe202`, with the development-only credentials in
+`server/.env.example`. `server/.env` must use the same host, port, and credentials.
+
+`npm run db:check` verifies connectivity, schema access, and inserting/reading a
+note inside a transaction that is rolled back. It leaves no test note behind.
+The check can consume an identity sequence value; gaps in note IDs are normal.
+
+Start Docker Desktop before `npm run db:up`. The project's Compose runner supports
+both `docker compose` and Docker Desktop's bundled macOS plugin when the Homebrew
+Docker CLI does not discover it. `npm run db:down` preserves database data.
